@@ -45,22 +45,141 @@ public class Piece {
         g.drawImage(this.img, x, y, null);
     }
     
-    
-    // TO BE IMPLEMENTED!
-    //return a list of every square that is "controlled" by this piece. A square is controlled
-    //if the piece capture into it legally.
-    public ArrayList<Square> getControlledSquares(Square[][] board, Square start) {
-     return null;
-    }
-    
+    // PreCondition: Needs a square grid structure and the current piece's position
+    // PostCondition: Returns ArrayList of Squares of where that piece can control, capture, etc.
+    public ArrayList<Square> getControlledSquares(Square[][] b, Square start) {
+      ArrayList<Square> moves = new ArrayList<Square>();
+      for (int cr = start.getRow(); cr < 8; cr++) {
+          if (start.getRow() != cr) {
+              Square tSquare = b[cr][start.getCol()];
+              if (tSquare.getOccupyingPiece() == null) {
+                  moves.add(tSquare);
+              } else {
+                  moves.add(tSquare);
+                  if (tSquare.getOccupyingPiece().getColor() != start.getOccupyingPiece().getColor()) {
+                      break;
+                  }
+              }
+          }
+      }
+  
+      for (int cr = start.getRow(); cr >= 0; cr--) {
+          if (start.getRow() != cr) {
+              Square tSquare = b[cr][start.getCol()];
+              if (tSquare.getOccupyingPiece() == null) {
+                  moves.add(tSquare);
+              } else {
+                  moves.add(tSquare);
+                  if (tSquare.getOccupyingPiece().getColor() != start.getOccupyingPiece().getColor()) {
+                      break;
+                  }
+              }
+          }
+      }
+  
+      for (int rc = start.getCol(); rc < 8; rc++) {
+          if (start.getCol() != rc) {
+              Square tSquare = b[start.getRow()][rc];
+              if (tSquare.getOccupyingPiece() == null) {
+                  moves.add(tSquare);
+              } else {
+                  moves.add(tSquare);
+                  if (tSquare.getOccupyingPiece().getColor() != start.getOccupyingPiece().getColor()) {
+                      break;
+                  }
+              }
+          }
+      }
+  
+      for (int rc = start.getCol(); rc >= 0; rc--) {
+          if (start.getCol() != rc) {
+              Square tSquare = b[start.getRow()][rc];
+              if (tSquare.getOccupyingPiece() == null) {
+                  moves.add(tSquare);
+              } else {
+                  moves.add(tSquare);
+                  if (tSquare.getOccupyingPiece().getColor() != start.getOccupyingPiece().getColor()) {
+                      break;
+                  }
+              }
+          }
+      }
+  
+      return moves;
+  }
+  
 
-    //TO BE IMPLEMENTED!
-    //implement the move function here
-    //it's up to you how the piece moves, but at the very least the rules should be logical and it should never move off the board!
-    //returns an arraylist of squares which are legal to move to
-    //please note that your piece must have some sort of logic. Just being able to move to every square on the board is not
-    //going to score any points.
-    public ArrayList<Square> getLegalMoves(Board b, Square start){
-    	return null;
-    }
+  // PreCondition: Requires board and square instances of the whole board and of the original starting position.
+  // PostCondition: Returns arrayList of all the legal moves.
+
+public ArrayList<Square> getLegalMoves(Board b, Square start) {
+  ArrayList<Square> moves = new ArrayList<Square>();
+
+  for (int cr = start.getRow(); cr < 8; cr++) {
+      if (start.getRow() != cr) {
+          Square tSquare = b.getSquareArray()[cr][start.getCol()];
+          if (tSquare.getOccupyingPiece() == null) {
+              moves.add(tSquare);
+          } else {
+              if (tSquare.getOccupyingPiece().getColor() != start.getOccupyingPiece().getColor()) {
+                  moves.add(tSquare);
+              }
+              break;
+          }
+      }
+  }
+
+  for (int cr = start.getRow(); cr >= 0; cr--) {
+      if (start.getRow() != cr) {
+
+
+          Square tSquare = b.getSquareArray()[cr][start.getCol()];
+          if (tSquare.getOccupyingPiece() == null) {
+
+              moves.add(tSquare);
+          } else {
+
+
+              if (tSquare.getOccupyingPiece().getColor() != start.getOccupyingPiece().getColor()) {
+                  moves.add(tSquare);
+              }
+              break;
+          }
+      }
+  }
+  for (int rc = start.getCol(); rc < 8; rc++) {
+      if (start.getCol() != rc) {
+          Square tSquare = b.getSquareArray()[start.getRow()][rc];
+          if (tSquare.getOccupyingPiece() == null) {
+              moves.add(tSquare);
+          } else {
+              if (tSquare.getOccupyingPiece().getColor() != start.getOccupyingPiece().getColor()) {
+                  moves.add(tSquare);
+              }
+              break;
+          }
+      }
+  }
+
+  for (int rc = start.getCol(); rc >= 0; rc--) {
+      if (start.getCol() != rc) {
+          Square tSquare = b.getSquareArray()[start.getRow()][rc];
+          if (tSquare.getOccupyingPiece() == null) {
+
+
+              moves.add(tSquare);
+          } else {
+              if (tSquare.getOccupyingPiece().getColor() != start.getOccupyingPiece().getColor()) {
+                  moves.add(tSquare);
+              }
+
+
+
+              break;
+          }
+      }
+  }
+
+  return moves;
+}
 }
